@@ -61,7 +61,7 @@ public class SinglyLinkedList {
         // Find the node at the desired location
         Node currentNode = head;
         int index = 0;
-        while (index < location - 1) {
+        while (index < location - 1) {  // We're using location - 1 because we want access to the previous node of the wanted location
             currentNode = currentNode.next;
             index++;
         }
@@ -130,6 +130,29 @@ public class SinglyLinkedList {
         size--;
     }
 
+    public void deleteAll() {
+        head = null;
+        tail = null;
+        size = 0;
+    }
+
+    public void reverse() {
+        // Reverse all the nodes in the list (using the three pointer method)
+        Node current = head;
+        Node next = null;
+        Node prev = null;
+
+        while (current != null) {
+            next = current.next;    // Store reference to next node
+            current.next = prev;    // Break old reference and replace it with reference to previous node
+            prev = current;         // Step to the next node
+            current = next;
+        }
+
+        tail = head;    // Flip head and tail
+        head = prev;
+    }
+
     private void checkLocation(int location) throws Exception {
         if (location < 0) {
             throw new IndexOutOfBoundsException("Location can not be negative");
@@ -142,6 +165,9 @@ public class SinglyLinkedList {
 
     @Override
     public String toString() {
+        if (size == 0) {
+            return "List is empty";
+        }
         StringBuilder result = new StringBuilder();
         Node currentNode = head;
 

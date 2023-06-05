@@ -16,5 +16,11 @@ public class Main {
 
         sll.deleteNode(2);
         System.out.println(sll);
+
+        sll.reverse();
+        System.out.println(sll);
+
+        sll.deleteAll();
+        System.out.println(sll);
     }
 }
