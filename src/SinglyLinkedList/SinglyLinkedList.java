@@ -5,6 +5,10 @@ public class SinglyLinkedList {
     Node tail;
     int size;
 
+    public int getSize() {
+        return size;
+    }
+
     public Node createSinglyLinkedList(int newNodeData) {
         Node newNode = new Node(newNodeData);
         head = newNode;
@@ -105,23 +109,28 @@ public class SinglyLinkedList {
     public void deleteNode(int location) throws Exception{
         this.checkLocation(location);
 
-        if (location == 0){
-            Node oldHead = head;
-            head = head.next;
-            oldHead = null;
+        if (size == 1) {
+            head = null;
+            tail = null;
+            size--;
             return;
         }
 
+        if (location == 0){
+            head = head.next;
+            size--;
+            return;
+        }
 
         Node foundNode = this.getNode(location - 1);
-        Node oldNextNode = foundNode.next.next;
-        foundNode.next = null;
-        foundNode.next = oldNextNode;
+        foundNode.next = foundNode.next.next;
+
         if (location == size - 1) tail = foundNode;
 
+        size--;
     }
 
-    public void checkLocation(int location) throws Exception {
+    private void checkLocation(int location) throws Exception {
         if (location < 0) {
             throw new IndexOutOfBoundsException("Location can not be negative");
         }
