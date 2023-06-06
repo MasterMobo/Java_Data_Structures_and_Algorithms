@@ -1,6 +1,6 @@
 package SinglyLinkedList;
 
-public class SinglyLinkedList {
+public class CircularSinglyLinkedList {
     private Node head;
     private Node tail;
     private int size;
@@ -15,13 +15,27 @@ public class SinglyLinkedList {
 
     public void createList(int newNodeData) {
         Node newNode = new Node(newNodeData);
+        newNode.next = newNode;
         head = newNode;
         tail = newNode;
         size = 1;
     }
 
+    public void prependNode(int newNodeData) {
+        if (head == null) {
+            this.createList(newNodeData);
+            return;
+        }
+
+        Node newNode = new Node(newNodeData);
+
+        newNode.next = head;
+        head = newNode;
+        tail.next = head;
+        size++;
+    }
+
     public void appendNode(int newNodeData) {
-        // Add node to end of list
         if (head == null) {
             this.createList(newNodeData);
             return;
@@ -29,20 +43,8 @@ public class SinglyLinkedList {
 
         Node newNode = new Node(newNodeData);
         tail.next = newNode;
-        tail = newNode;
-        size++;
-    }
-
-    public void prependNode(int newNodeData) {
-        // Add node to beginning of list
-        if (head == null) {
-            this.createList(newNodeData);
-            return;
-        }
-
-        Node newNode = new Node(newNodeData);
         newNode.next = head;
-        head = newNode;
+        tail = newNode;
         size++;
     }
 
@@ -52,19 +54,18 @@ public class SinglyLinkedList {
         }
 
         if (location == 0) {
-            prependNode(newNodeData);
+            this.prependNode(newNodeData);
             return;
         }
 
         if (location >= size) {
-            appendNode(newNodeData);
+            this.appendNode(newNodeData);
             return;
         }
 
-        // Find the node at the desired location
-        Node currentNode = head;
         int index = 0;
-        while (index < location - 1) {  // We're using location - 1 because we want access to the previous node of the wanted location
+        Node currentNode = head;
+        while (index < location - 1) {
             currentNode = currentNode.next;
             index++;
         }
@@ -104,10 +105,6 @@ public class SinglyLinkedList {
         return currentNode;
     }
 
-    public void updateNode(int location, int newData) throws Exception{
-        this.getNode(location).data = newData;
-    }
-
     public void deleteNode(int location) throws Exception{
         this.checkLocation(location);
 
@@ -116,16 +113,18 @@ public class SinglyLinkedList {
             return;
         }
 
-        if (location == 0){
+        if (location == 0) {
+            tail.next = head.next;
             head = head.next;
             size--;
             return;
         }
 
-        Node foundNode = this.getNode(location - 1);
-        foundNode.next = foundNode.next.next;
 
-        if (location == size - 1) tail = foundNode;
+        Node currentNode = this.getNode(location - 1);
+        currentNode.next = currentNode.next.next;
+
+        if (location == size - 1) tail = currentNode;
 
         size--;
     }
@@ -134,23 +133,6 @@ public class SinglyLinkedList {
         head = null;
         tail = null;
         size = 0;
-    }
-
-    public void reverse() {
-        // Reverse all the nodes in the list (using the three pointer method)
-        Node current = head;
-        Node next = null;
-        Node prev = null;
-
-        while (current != null) {
-            next = current.next;    // Store reference to next node
-            current.next = prev;    // Break old reference and replace it with reference to previous node
-            prev = current;         // Step to the next node
-            current = next;
-        }
-
-        tail = head;    // Flip head and tail
-        head = prev;
     }
 
     private void checkLocation(int location) throws Exception {
@@ -171,7 +153,7 @@ public class SinglyLinkedList {
         StringBuilder result = new StringBuilder();
         Node currentNode = head;
 
-        while (currentNode != null) {
+        for (int i = 0; i < size; i++) {
             result.append(currentNode.data);
             if (currentNode != tail) result.append(" -> ");
             currentNode = currentNode.next;
