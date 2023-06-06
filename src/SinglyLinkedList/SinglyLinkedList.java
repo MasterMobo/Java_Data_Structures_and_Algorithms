@@ -132,6 +132,7 @@ public class SinglyLinkedList {
 
     public void deleteAll() {
         head = null;
+        tail.next = null;
         tail = null;
         size = 0;
     }

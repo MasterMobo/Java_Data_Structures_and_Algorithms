@@ -151,11 +151,11 @@ public class CircularSinglyLinkedList {
             return "List is empty";
         }
         StringBuilder result = new StringBuilder();
+        result.append("-> ");
         Node currentNode = head;
 
         for (int i = 0; i < size; i++) {
-            result.append(currentNode.data);
-            if (currentNode != tail) result.append(" -> ");
+            result.append(currentNode.data).append(" -> ");
             currentNode = currentNode.next;
         }
 
