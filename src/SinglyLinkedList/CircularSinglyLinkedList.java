@@ -145,6 +145,24 @@ public class CircularSinglyLinkedList {
         }
     }
 
+    public void reverse() {
+        // Reverse all the nodes in the list (using the three pointer method)
+        Node current = head;
+        Node next = null;
+        Node prev = tail;
+
+        for (int i = 0; i < size; i++) {
+            next = current.next;    // Store reference to next node
+            current.next = prev;    // Break old reference and replace it with reference to previous node
+            prev = current;         // Step to the next node
+            current = next;
+        }
+
+        tail = head;    // Flip head and tail
+        head = prev;
+    }
+
+
     @Override
     public String toString() {
         if (size == 0) {

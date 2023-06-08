@@ -5,6 +5,18 @@ class Node {
     Node next;
     Node prev;
 
+    public int getData() {
+        return data;
+    }
+
+    public Node getNext() {
+        return next;
+    }
+
+    public Node getPrev() {
+        return prev;
+    }
+
     public Node(int data) {
         this.data = data;
     }

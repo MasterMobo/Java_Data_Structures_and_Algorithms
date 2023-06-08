@@ -9,9 +9,13 @@ public class SinglyLinkedList {
         return size;
     }
 
-    public Node getHead() { return head; }
+    public Node getHead() {
+        return head;
+    }
 
-    public Node getTail() { return tail; }
+    public Node getTail() {
+        return tail;
+    }
 
     public void createList(int newNodeData) {
         Node newNode = new Node(newNodeData);
@@ -104,11 +108,11 @@ public class SinglyLinkedList {
         return currentNode;
     }
 
-    public void updateNode(int location, int newData) throws Exception{
+    public void updateNode(int location, int newData) throws Exception {
         this.getNode(location).data = newData;
     }
 
-    public void deleteNode(int location) throws Exception{
+    public void deleteNode(int location) throws Exception {
         this.checkLocation(location);
 
         if (size == 1) {
@@ -116,7 +120,7 @@ public class SinglyLinkedList {
             return;
         }
 
-        if (location == 0){
+        if (location == 0) {
             head = head.next;
             size--;
             return;
@@ -183,5 +187,32 @@ public class SinglyLinkedList {
 
     public void display() {
         System.out.println(this);
+    }
+
+    public static Node sumBetweenZeros(Node head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        //Write your code here
+        Node left = head;
+        Node right = head.next;
+
+        while (right != null && right.next != null) {
+            if (left.data == 0 && right.data == 0) {
+                while (left.next != right) {
+                    left.data +=  left.next.data;
+                    left.next = left.next.next;
+                }
+                left = left.next;
+            }
+            if (left.data != 0) {
+                left = left.next;
+            }
+
+            right = right.next;
+        }
+
+        return head;
     }
 }

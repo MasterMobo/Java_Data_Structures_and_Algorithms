@@ -1,6 +1,6 @@
 package DoublyLinkedList;
 
-public class DoublyLinkedList {
+public class CircularDoublyLinkedList {
     private Node head;
     private Node tail;
     private int size;
@@ -19,6 +19,8 @@ public class DoublyLinkedList {
 
     public void createList(int newNodeData) {
         Node newNode = new Node(newNodeData);
+        newNode.prev = newNode;
+        newNode.next = newNode;
         head = newNode;
         tail = newNode;
         size = 1;
@@ -29,9 +31,12 @@ public class DoublyLinkedList {
             createList(newNodeData);
             return;
         }
+
         Node newNode = new Node(newNodeData);
-        head.prev = newNode;
         newNode.next = head;
+        newNode.prev = tail;
+        head.prev = newNode;
+        tail.next = newNode;
         head = newNode;
         size++;
     }
@@ -43,13 +48,15 @@ public class DoublyLinkedList {
         }
 
         Node newNode = new Node(newNodeData);
-        tail.next = newNode;
         newNode.prev = tail;
+        newNode.next = head;
+        head.prev = newNode;
+        tail.next = newNode;
         tail = newNode;
         size++;
     }
 
-    public void insertNode(int location,int newNodeData) throws Exception{
+    public void insertNode(int location, int newNodeData) throws Exception {
         if (location < 0) {
             throw new IndexOutOfBoundsException("Location can not be negative");
         }
@@ -64,20 +71,18 @@ public class DoublyLinkedList {
             return;
         }
 
-        // Find the desired node
         Node current = head;
         for (int i = 0; i < location; i++) {
             current = current.next;
         }
 
         Node newNode = new Node(newNodeData);
-        newNode.next = current;
         newNode.prev = current.prev;
+        newNode.next = current;
         current.prev.next = newNode;
         current.prev = newNode;
         size++;
     }
-
 
     public Node getNode(int location) throws Exception {
         this.checkLocation(location);
@@ -112,6 +117,38 @@ public class DoublyLinkedList {
         this.getNode(location).data = newData;
     }
 
+    public void deleteNode(int location) throws Exception{
+        checkLocation(location);
+
+        if (size == 1){
+            head.prev = null;
+            head.next = null;
+            head = null;
+            tail = null;
+            size--;
+            return;
+        }
+
+        if (location == 0) {
+            head = head.next;
+            head.prev = tail;
+            tail.next = head;
+            size--;
+            return;
+        }
+
+
+        Node current = head;
+        for (int i = 0; i < location; i++) {
+            current = current.next;
+        }
+
+        current.prev.next = current.next;
+        current.next.prev = current.prev;
+        if (location == size - 1) tail = tail.prev;
+        size--;
+    }
+
     private void checkLocation(int location) throws Exception {
         if (location < 0) {
             throw new IndexOutOfBoundsException("Location can not be negative");
@@ -122,43 +159,9 @@ public class DoublyLinkedList {
         }
     }
 
-    public void deleteNode(int location) throws Exception{
-        checkLocation(location);
-
-        if (size == 1) {
-            head = null;
-            tail = null;
-            size = 0;
-            return;
-        }
-
-         if (location == 0) {
-             head = head.next;
-             head.prev = null;
-             size--;
-             return;
-         }
-
-         if (location == size - 1) {
-             tail = tail.prev;
-             tail.next = null;
-             size--;
-             return;
-         }
-
-         Node current = head;
-         for (int i = 0; i < location; i++) {
-             current = current.next;
-         }
-
-         current.prev.next = current.next;
-         current.next.prev = current.prev;
-         size--;
-    }
-
     public void deleteAll() {
         Node current = head;
-        while (current != null) {
+        for (int i = 0; i < size; i++) {
             current.prev = null;
             current = current.next;
         }
@@ -169,9 +172,9 @@ public class DoublyLinkedList {
 
     public void reverse() {
         Node current = head;
-        Node prev = null;
+        Node prev = tail;
         Node next = null;
-        while (current != null) {
+        for (int i = 0; i < size; i++) {
             next = current.next;
             current.next = prev;
             current.prev = next;
@@ -183,34 +186,18 @@ public class DoublyLinkedList {
         head = prev;
     }
 
-    public String showReverse() {
-        // Returns reversed string representation without actually reversing the list
-        if (size == 0) {
-            return "List is empty";
-        }
-        StringBuilder result = new StringBuilder();
-
-        Node current = tail;
-        while (current != null) {
-            result.append(current.data);
-            if (current != head) result.append(" <-> ");
-            current = current.prev;
-        }
-
-        return result.toString();
-    }
-
     @Override
     public String toString() {
         if (size == 0) {
             return "List is empty";
         }
         StringBuilder result = new StringBuilder();
+        result.append("<-> ");
 
         Node current = head;
-        while (current != null) {
+        for (int i = 0; i < size; i++) {
             result.append(current.data);
-            if (current != tail) result.append(" <-> ");
+            result.append(" <-> ");
             current = current.next;
         }
 
@@ -220,5 +207,4 @@ public class DoublyLinkedList {
     public void display() {
         System.out.println(this);
     }
-
 }
