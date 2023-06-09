@@ -1,27 +1,17 @@
 package SinglyLinkedList;
 
 public class SinglyLinkedList {
-    private Node head;
-    private Node tail;
-    private int size;
+    public Node head;
+    public Node tail;
+    public int size;
 
-    public int getSize() {
-        return size;
-    }
 
-    public Node getHead() {
-        return head;
-    }
-
-    public Node getTail() {
-        return tail;
-    }
-
-    public void createList(int newNodeData) {
+    public Node createList(int newNodeData) {
         Node newNode = new Node(newNodeData);
         head = newNode;
         tail = newNode;
         size = 1;
+        return head;
     }
 
     public void appendNode(int newNodeData) {

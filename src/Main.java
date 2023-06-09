@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) throws Exception{
         SinglyLinkedList.Test.run();
 //        DoublyLinkedList.Test.run();
-
+        Stack.Test.run();
     }
 
 }

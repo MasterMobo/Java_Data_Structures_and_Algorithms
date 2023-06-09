@@ -1,21 +1,9 @@
 package DoublyLinkedList;
 
 public class DoublyLinkedList {
-    private Node head;
-    private Node tail;
-    private int size;
-
-    public Node getHead() {
-        return head;
-    }
-
-    public Node getTail() {
-        return tail;
-    }
-
-    public int getSize() {
-        return size;
-    }
+    public Node head;
+    public Node tail;
+    public int size;
 
     public void createList(int newNodeData) {
         Node newNode = new Node(newNodeData);

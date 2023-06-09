@@ -1,9 +1,9 @@
 package DoublyLinkedList;
 
-class Node {
-    int data;
-    Node next;
-    Node prev;
+public class Node {
+    public int data;
+    public Node next;
+    public Node prev;
 
     public int getData() {
         return data;

@@ -1,17 +1,9 @@
 package SinglyLinkedList;
 
 public class CircularSinglyLinkedList {
-    private Node head;
-    private Node tail;
-    private int size;
-
-    public int getSize() {
-        return size;
-    }
-
-    public Node getHead() { return head; }
-
-    public Node getTail() { return tail; }
+    public Node head;
+    public Node tail;
+    public int size;
 
     public void createList(int newNodeData) {
         Node newNode = new Node(newNodeData);
