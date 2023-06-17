@@ -27,7 +27,7 @@ public class Test {
         cdll.appendNode(7);
         cdll.insertNode(2, 30);
         cdll.deleteNode(0);
-        cdll.deleteNode(cdll.getSize() - 1);
+        cdll.deleteNode(cdll.size - 1);
         cdll.deleteNode(1);
         System.out.println(cdll);
         cdll.reverse();

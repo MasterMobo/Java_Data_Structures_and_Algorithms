@@ -5,7 +5,6 @@ import SinglyLinkedList.*;
 public class StackList {
     // Stack implementation using Singly Linked List. Variable size.
     SinglyLinkedList list;
-    Node top;
 
     public StackList() {
         list = new SinglyLinkedList();
@@ -13,29 +12,28 @@ public class StackList {
 
     public StackList(int val) {
         list = new SinglyLinkedList();
-        top = list.createList(val);
+        list.prependNode(val);
     }
 
     public void push(int val) {
-        list.appendNode(val);
+        list.prependNode(val);
     }
 
     public int pop() {
         if (isEmpty()) return - 1;
 
-        int returnVal = top.data;
+        int returnVal = list.head.data;
         list.head = list.head.next;
-        top = top.next;
         return returnVal;
     }
 
     public int peek() {
         if (isEmpty()) return - 1;
 
-        return top.data;
+        return list.head.data;
     }
 
     public boolean isEmpty() {
-        return top == null;
+        return list.head == null;
     }
 }

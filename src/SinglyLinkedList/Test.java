@@ -48,6 +48,6 @@ public class Test {
         zerosSum.appendNode(0);
         zerosSum.appendNode(6);
         zerosSum.appendNode(0);
-        System.out.println(SinglyLinkedList.sumBetweenZeros(zerosSum.getHead()));
+        System.out.println(SinglyLinkedList.sumBetweenZeros(zerosSum.head));
     }
 }
