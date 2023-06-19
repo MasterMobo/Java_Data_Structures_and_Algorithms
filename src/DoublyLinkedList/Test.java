@@ -1,21 +1,21 @@
 package DoublyLinkedList;
 
 public class Test {
-    public static void run() throws Exception{
-//        System.out.println("== Doubly Linked List ==========================");
-//        DoublyLinkedList dll = new DoublyLinkedList();
-//        dll.prependNode(9);
-//        dll.prependNode(8);
-//        dll.prependNode(7);
-//        dll.appendNode(10);
-//        dll.insertNode(2, 30);
-//        dll.deleteNode(3);
-//        System.out.println(dll);
-//        dll.reverse();
-//        System.out.println(dll);
-//        dll.deleteAll();
-//        System.out.println(dll);
-//        System.out.println(dll.showReverse());
+    public static void main(String[] args) throws Exception{
+        System.out.println("== Doubly Linked List ==========================");
+        DoublyLinkedList dll = new DoublyLinkedList();
+        dll.prependNode(9);
+        dll.prependNode(8);
+        dll.prependNode(7);
+        dll.appendNode(10);
+        dll.insertNode(2, 30);
+        dll.deleteNode(3);
+        System.out.println(dll);
+        dll.reverse();
+        System.out.println(dll);
+        dll.deleteAll();
+        System.out.println(dll);
+        System.out.println(dll.showReverse());
 
         System.out.println("== Circular Doubly Linked List ==========================");
         CircularDoublyLinkedList cdll = new CircularDoublyLinkedList();

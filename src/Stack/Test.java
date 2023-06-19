@@ -5,7 +5,7 @@ import Stack.Plates.StackSet;
 import Stack.QueueViaStack.QueueViaStack;
 
 public class Test {
-    public static void run() throws Exception {
+    public static void main(String[] args) {
 //        StackList stack = new StackList(10);
 //        stack.push(1);
 //        stack.push(2);
