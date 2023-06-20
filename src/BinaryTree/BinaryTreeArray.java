@@ -1,10 +1,11 @@
-package BinaryTreeArray;
+package BinaryTree;
 
-public class BinaryTree {
+public class BinaryTreeArray {
+    // Binary tree implementation using Array. Fixed size.
     int[] arr;
     int lastInd;
 
-    public BinaryTree(int size) {
+    public BinaryTreeArray(int size) {
         arr = new int[size + 1];
         lastInd = 0;
     }

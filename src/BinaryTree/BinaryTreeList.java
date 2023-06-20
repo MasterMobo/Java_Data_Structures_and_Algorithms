@@ -1,13 +1,13 @@
-package BinaryTreeList;
+package BinaryTree;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class BinaryTree {
-    // Binary Tree Implementation using Singly Linked List
+public class BinaryTreeList {
+    // Binary Tree Implementation using Singly Linked List. Variable size.
     Node root;
 
-    public BinaryTree() {
+    public BinaryTreeList() {
         root = null;
     }
 

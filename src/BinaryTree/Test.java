@@ -1,10 +1,10 @@
-package BinaryTreeArray;
+package BinaryTree;
 
 import java.util.Arrays;
 
 public class Test {
     public static void main(String[] args) {
-        BinaryTree tree = new BinaryTree(5);
+        BinaryTreeArray tree = new BinaryTreeArray(5);
         tree.insert(1);
         tree.insert(2);
         tree.insert(3);
@@ -18,5 +18,14 @@ public class Test {
         tree.postOrder(1);
         System.out.println();
         tree.levelOder();
+
+        BinaryTreeList treelist = new BinaryTreeList();
+        treelist.insert(5);
+        treelist.insert(4);
+        treelist.insert(3);
+        treelist.insert(2);
+        treelist.insert(1);
+        treelist.insert(6);
+        treelist.show(treelist.root, 0);
     }
 }
