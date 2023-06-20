@@ -66,6 +66,50 @@ public class BinaryTree {
         return null;
     }
 
+    public void insert(int val) {
+        if (root == null) {
+            root = new Node(val);
+            return;
+        }
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+        Node current;
+
+        while (!queue.isEmpty()) {
+            current = queue.remove();
+
+            if (current.left == null) {
+                current.left = new Node(val);
+                return;
+            }
+
+            if (current.right == null) {
+                current.right = new Node(val);
+                return;
+            }
+
+            queue.add(current.left);
+            queue.add(current.right);
+        }
+    }
+
+    public void delete(int val) {
+        if (root == null) return;
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+        Node deepest;
+        Node target;
+        while (!queue.isEmpty()) {
+            deepest = queue.remove();
+            if (deepest.val == val) target = deepest;
+            if (deepest.left != null) queue.add(deepest.left);
+            if (deepest.right != null) queue.add(deepest.right);
+        }
+
+
+    }
     public void show(Node node, int level) {
         if (node == null) return;
 
