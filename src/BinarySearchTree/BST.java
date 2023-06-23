@@ -39,7 +39,7 @@ public class BST {
         }
     }
 
-        // In-order Traversal
+    // In-order Traversal
     public void inOrder(Node node) {
         if (node == null) return;
 
