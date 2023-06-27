@@ -113,6 +113,70 @@ public class AVL {
         return current;
     }
 
+    private Node successor(Node node) {
+        Node current = node.right;
+        while (current.left != null) {
+            current = current.left;
+        }
+        return current;
+    }
+
+    private Node delete(Node node, int val) {
+        // Standard BST deletion
+        if (node == null) return null;
+
+        if (val > node.val) {
+            node.right = delete(node.right, val);
+        } else if (val < node.val){
+            node.left = delete(node.left, val);
+        } else {
+            if (node.left != null && node.right != null) {
+                Node successor = successor(node);
+                node.val = successor.val;
+                node.right = delete(node.right, successor.val);
+            } else if (node.left != null) {
+                node = node.left;
+            } else if (node.right != null) {
+                node = node.right;
+            } else {
+                return null;
+            }
+        }
+
+        // Check balance
+        node.height = 1 + Math.max(getHeight(node.left), getHeight(node.right));
+        int balance = getBalanceFactor(node);
+
+        // Left-left condition
+        if (balance > 1 && val < node.left.val) {
+            return rotateRight(node);
+        }
+        // Left-right condition
+        if (balance > 1 && val > node.left.val) {
+            node.left = rotateLeft(node.left);
+            return rotateRight(node);
+        }
+        // Right-right condition
+        if (balance < -1 && val > node.right.val) {
+            return rotateLeft(node);
+        }
+        // Right-left condition
+        if (balance < -1 && val < node.right.val) {
+            node.right = rotateRight(node.right);
+            return rotateLeft(node);
+        }
+
+        return node;
+    }
+
+    public void delete(int val) {
+        root = delete(root, val);
+    }
+
+    public void deleteAll() {
+        root = null;
+    }
+
     // In-order Traversal
     public void inOrder(Node node) {
         if (node == null) return;
