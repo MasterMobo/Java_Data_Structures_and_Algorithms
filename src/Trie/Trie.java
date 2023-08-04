@@ -1,5 +1,7 @@
 package Trie;
 
+import java.util.Stack;
+
 public class Trie {
     Node root;
 
@@ -22,6 +24,7 @@ public class Trie {
         current.isEnd = true;
     }
 
+
     public boolean exists(String s) {
         Node current = root;
         for (int i = 0; i < s.length(); i++) {
@@ -32,4 +35,9 @@ public class Trie {
 
         return current.isEnd;
     }
+
+    public void delete(String s) {
+
+}
+
 }

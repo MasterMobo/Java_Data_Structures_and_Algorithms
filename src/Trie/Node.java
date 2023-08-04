@@ -18,7 +18,14 @@ public class Node {
         return children.get(key);
     }
 
+    public int size() {
+        return children.size();
+    }
+
+    public void removeChild(char c) {children.remove(c);}
+
     public void addChild(char c) {
         children.put(c, new Node());
     }
+
 }
