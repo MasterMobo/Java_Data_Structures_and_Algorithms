@@ -1,6 +1,4 @@
-package Graph.GraphMatrix;
-
-import java.util.Arrays;
+package Graph.GraphList;
 
 public class Main {
     public static void main(String[] args) {

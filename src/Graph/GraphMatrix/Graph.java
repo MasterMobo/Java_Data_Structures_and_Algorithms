@@ -1,5 +1,10 @@
 package Graph.GraphMatrix;
 
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class Graph {
     Node[] nodes;
     int size;
@@ -49,6 +54,37 @@ public class Graph {
     public void edgeTo(int fromInd, int toInd, int weight) {
         // Adds directed weighted edge between two nodes
         matrix[fromInd][toInd] = weight;
+    }
+
+    public ArrayList<Node> BFS(int index) {
+        ArrayList<Node> res = new ArrayList<>(nodes.length);
+        Queue<Node> queue = new LinkedList<>();
+
+        Node current = nodes[index];
+        queue.add(current);
+        while (!queue.isEmpty()) {
+            current = queue.remove();
+            current.visited = true;
+            res.add(current);
+            for (int i = 0; i < matrix.length; i++) {
+                if (matrix[current.index][i] > 0 && !nodes[i].visited) {
+                    nodes[i].visited = true;
+                    queue.add(nodes[i]);
+                }
+            }
+        }
+
+        return res;
+    }
+
+    public ArrayList<Node> getNeighbors(int index) {
+        ArrayList<Node> res = new ArrayList<>();
+
+        for (int i = 0; i < matrix.length; i++) {
+            if (matrix[index][i] > 0) res.add(nodes[i]);
+        }
+
+        return res;
     }
 
     @Override
